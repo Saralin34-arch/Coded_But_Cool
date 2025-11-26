@@ -1,0 +1,14 @@
+::1 - - [25/Nov/2025 21:35:00] "HEAD / HTTP/1.1" 200 -
+::1 - - [25/Nov/2025 21:35:10] "GET / HTTP/1.1" 200 -
+::1 - - [25/Nov/2025 21:35:10] code 404, message File not found
+::1 - - [25/Nov/2025 21:35:10] "GET /styles.css HTTP/1.1" 404 -
+::1 - - [25/Nov/2025 21:35:10] "GET /script.js HTTP/1.1" 200 -
+::1 - - [25/Nov/2025 21:35:10] code 404, message File not found
+::1 - - [25/Nov/2025 21:35:10] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [25/Nov/2025 21:37:29] "HEAD /index.html HTTP/1.1" 200 -
+::1 - - [25/Nov/2025 21:37:54] code 404, message File not found
+::1 - - [25/Nov/2025 21:37:54] "HEAD /style.css HTTP/1.1" 404 -
+::1 - - [25/Nov/2025 21:37:58] "HEAD /script.js HTTP/1.1" 200 -
+::1 - - [25/Nov/2025 21:38:23] code 404, message File not found
+::1 - - [25/Nov/2025 21:38:23] "HEAD /style.css HTTP/1.1" 404 -
+::1 - - [25/Nov/2025 21:38:51] "HEAD /styles.css HTTP/1.1" 200 -

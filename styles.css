@@ -1,0 +1,305 @@
+/* ===== Base reset ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", Arial, sans-serif;
+  background: #f5f5f5;
+  color: #222222;
+  line-height: 1.6;
+}
+
+/* ===== Header ===== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 5vw;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid #e0e0e0;
+  backdrop-filter: blur(8px);
+}
+
+.brand {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.header-meta {
+  font-size: 0.8rem;
+  color: #777777;
+}
+
+/* ===== Side panel (Index & Info) ===== */
+
+.side-panel {
+  position: fixed;
+  top: 4.5rem;
+  right: 3vw;
+  width: 190px;
+  font-size: 0.8rem;
+  color: #555555;
+}
+
+.side-section {
+  margin-bottom: 1.6rem;
+}
+
+.side-label {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: #999999;
+  margin-bottom: 0.4rem;
+}
+
+.side-nav a {
+  display: block;
+  color: #444444;
+  text-decoration: none;
+  margin: 0.15rem 0;
+  padding: 0.05rem 0;
+  border-radius: 2px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.side-nav a:hover {
+  background: #eaeaea;
+  color: #111111;
+}
+
+.side-text {
+  margin: 0;
+  color: #777777;
+}
+
+/* ===== Canvas with overlapping cards ===== */
+
+.canvas {
+  padding: 4rem 5vw 3rem;
+}
+
+.canvas-inner {
+  position: relative;
+  min-height: 60vh;
+  max-width: 1200px;
+  margin-right: 250px; /* space for side panel */
+}
+
+/* Generic card styling (grey rectangles) */
+.card {
+  position: absolute;
+  background: #f0f0f0;
+  border-radius: 18px;
+  border: 1px solid #dedede;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #666666;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* “+” corner markers (purely visual) */
+.card::before,
+.card::after {
+  content: "+";
+  position: absolute;
+  font-size: 1.05rem;
+  color: #bbbbbb;
+}
+
+.card::before {
+  top: 0.7rem;
+  left: 1rem;
+}
+
+.card::after {
+  bottom: 0.7rem;
+  right: 1rem;
+}
+
+.card-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  color: #999999;
+  margin-bottom: 0.4rem;
+}
+
+.card-placeholder {
+  font-size: 0.9rem;
+  color: #777777;
+}
+
+/* Hover microinteraction */
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12);
+}
+
+/* Individual card sizes and positions */
+.card--large {
+  width: 48%;
+  height: 42vh;
+  left: 4%;
+  top: 2.5rem;
+}
+
+.card--medium {
+  width: 32%;
+  height: 28vh;
+  right: 10%;
+  top: 4.3rem;
+}
+
+.card--wide {
+  width: 60%;
+  height: 22vh;
+  left: 12%;
+  bottom: 4rem;
+}
+
+.card--tall {
+  width: 22%;
+  height: 40vh;
+  right: 15%;
+  bottom: 1.5rem;
+}
+
+/* ===== Sections ===== */
+
+.section {
+  padding: 3rem 5vw;
+  max-width: 880px;
+  margin-right: 250px; /* space for side panel */
+}
+
+.section-title {
+  margin: 0 0 0.6rem;
+  font-size: 1.2rem;
+}
+
+.section-body {
+  font-size: 0.95rem;
+  color: #555555;
+}
+
+.section--columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.section--columns .column {
+  flex: 1 1 260px;
+}
+
+.section--columns h3 {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+}
+
+.section--columns ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.92rem;
+  color: #555555;
+}
+
+/* ===== Footer ===== */
+
+.site-footer {
+  margin-top: 3rem;
+  padding: 1.4rem 5vw 2rem;
+  border-top: 1px solid #dddddd;
+  font-size: 0.8rem;
+  color: #777777;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 880px;
+  margin-right: 250px;
+}
+
+.footer-note {
+  color: #999999;
+}
+
+/* ===== Tooltip ===== */
+
+.tooltip {
+  position: fixed;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 100;
+}
+
+.tooltip-inner {
+  max-width: 260px;
+  padding: 0.5rem 0.7rem;
+  border-radius: 4px;
+  background: #111111;
+  color: #f8f8f8;
+  font-size: 0.78rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Scroll reveal ===== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 960px) {
+  .side-panel {
+    display: none;
+  }
+
+  .canvas-inner,
+  .section,
+  .site-footer {
+    margin-right: 0;
+  }
+
+  .canvas-inner {
+    min-height: auto;
+    padding-bottom: 3rem;
+  }
+
+  /* Stack cards instead of overlapping */
+  .card {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.5rem;
+  }
+}

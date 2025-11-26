@@ -2,228 +2,130 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Bio-Intelligence Plugin</title>
+  <title>Layout Playground – MycoCore</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="logo">Bio-Intelligence Plugin</div>
-    <nav class="nav">
-      <a href="#about">About</a>
-      <a href="#features">Features</a>
-      <a href="#how-it-works">How it Works</a>
-      <a href="#download">Download</a>
-    </nav>
+    <div class="brand">MycoCore / Layout Demo</div>
+    <div class="header-meta">Wireframe · 2025</div>
   </header>
 
+  <!-- Right-side index / info panel -->
+  <aside class="side-panel">
+    <div class="side-section">
+      <div class="side-label">Index</div>
+      <nav class="side-nav">
+        <a href="#canvas">Canvas</a>
+        <a href="#about">About</a>
+        <a href="#structure">Structure</a>
+        <a href="#notes">Notes</a>
+      </nav>
+    </div>
+    <div class="side-section">
+      <div class="side-label">Info</div>
+      <p class="side-text">
+        Simple layout inspired by Cargo wireframes.<br />
+        Use this as a starting point to integrate your plugin UI.
+      </p>
+    </div>
+  </aside>
+
   <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-inner">
-        <h1>Translating biological intelligence into design tools</h1>
-        <p class="hero-tagline">
-          A generative design plugin that helps researchers, architects, and engineers
-          create efficient, resilient, and carbon-conscious structures by embedding
-          nature’s evolutionary logics into the design process.
-        </p>
-        <div class="hero-actions">
-          <button
-            class="btn primary has-tooltip"
-            data-tooltip="Download the latest version of the plugin.<br>Supports Rhino + Grasshopper."
-          >
-            Download Plugin
-          </button>
+    <!-- MAIN CANVAS -->
+    <section id="canvas" class="canvas">
+      <div class="canvas-inner">
+        <!-- Large overlapping cards with "+" corners -->
+        <article class="card card--large reveal has-tooltip"
+                 data-tooltip="Primary content area. Place hero image, statement, or plugin preview here.">
+          <span class="card-label">Main Panel</span>
+          <span class="card-placeholder">Drop main content</span>
+        </article>
 
-          <button
-            class="btn ghost has-tooltip"
-            data-tooltip="Read how to install and start using the plugin in your workflow."
-          >
-            View Documentation
-          </button>
-        </div>
-        <p class="hero-note">
-          Designed for biomimetic workflows, early-stage exploration, and energy-aware design.
-        </p>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-orbit">
-          <div class="hero-node hero-node--main"></div>
-          <div class="hero-node hero-node--1"></div>
-          <div class="hero-node hero-node--2"></div>
-          <div class="hero-node hero-node--3"></div>
-        </div>
+        <article class="card card--medium reveal has-tooltip"
+                 data-tooltip="Secondary panel. Use for project list, quick links, or a short description.">
+          <span class="card-label">Secondary Panel</span>
+          <span class="card-placeholder">Drop supporting content</span>
+        </article>
+
+        <article class="card card--wide reveal has-tooltip"
+                 data-tooltip="Use this strip for navigation, tags, or a short timeline.">
+          <span class="card-label">Wide Strip</span>
+          <span class="card-placeholder">Drop navigation / tags</span>
+        </article>
+
+        <article class="card card--tall reveal has-tooltip"
+                 data-tooltip="Tall column. Good for notes, parameters, or plugin settings.">
+          <span class="card-label">Tall Panel</span>
+          <span class="card-placeholder">Drop notes / settings</span>
+        </article>
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT SECTION -->
     <section id="about" class="section">
-      <div class="section-header">
-        <h2>About the Plugin</h2>
+      <h2 class="section-title">About this layout</h2>
+      <div class="section-body">
         <p>
-          This plugin bridges speculative bio-inspired research and real-world application.
-          It turns evolutionary logics—growth, adaptation, redundancy—into controllable
-          design parameters that can be applied to surfaces, structures, and façade systems.
+          This page is a neutral wireframe built with plain HTML, CSS, and a small
+          amount of JavaScript. It takes cues from Cargo’s demo layouts:
+          overlapping grey rectangles, plus signs indicating editable areas,
+          and a minimal index on the right side.
+        </p>
+        <p>
+          Replace the placeholder labels with your own plugin content: images,
+          descriptions, or embedded demos. You can also adjust the positions
+          and sizes of the cards to match your own composition.
         </p>
       </div>
-      <div class="section-grid">
-        <div class="card">
-          <h3>Biological Intelligence</h3>
-          <p>
-            Model patterns from fungal networks, branching systems, and other organisms
-            as parametric logics that you can tune in real time.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Design Integration</h3>
-          <p>
-            Built for computational design environments so you can plug directly into
-            existing Grasshopper or BIM workflows.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Carbon-Conscious</h3>
-          <p>
-            Pair formal exploration with performance metrics—optimizing for material
-            efficiency, daylight, and energy impact.
-          </p>
-        </div>
+    </section>
+
+    <!-- STRUCTURE SECTION -->
+    <section id="structure" class="section section--columns">
+      <div class="column">
+        <h3>Layout principles</h3>
+        <ul>
+          <li>Large, simple blocks instead of dense UI elements.</li>
+          <li>Overlapping cards to suggest depth and hierarchy.</li>
+          <li>Ample white space around the “canvas” area.</li>
+          <li>Small, light typography in the chrome (header + index).</li>
+        </ul>
+      </div>
+      <div class="column">
+        <h3>How to adapt</h3>
+        <ul>
+          <li>Swap grey cards for images or interactive previews.</li>
+          <li>Map each card to a specific plugin function.</li>
+          <li>Use the side panel for quick access to sections or presets.</li>
+          <li>Extend the layout with more cards or a grid if needed.</li>
+        </ul>
       </div>
     </section>
 
-    <!-- FEATURES -->
-    <section id="features" class="section section-alt">
-      <div class="section-header">
-        <h2>Key Features</h2>
-      </div>
-      <div class="section-grid">
-        <div class="feature-row">
-          <div class="feature-label">Generative Growth Systems</div>
-          <div class="feature-desc">
-            Control growth radius, branching density, and iteration depth to simulate
-            bio-inspired networks across surfaces and volumes.
-          </div>
-        </div>
-        <div class="feature-row">
-          <div class="feature-label">Surface & Façade Mapping</div>
-          <div class="feature-desc">
-            Map patterns onto complex geometry, façade panels, or structural grids while
-            keeping parameters editable.
-          </div>
-        </div>
-        <div class="feature-row">
-          <div class="feature-label">Performance Hooks</div>
-          <div class="feature-desc">
-            Connect to daylight, radiation, or energy analysis tools to evaluate
-            different growth logics against performance targets.
-          </div>
-        </div>
-        <div class="feature-row">
-          <div class="feature-label">Export-Ready Output</div>
-          <div class="feature-desc">
-            Bake geometry for fabrication, documentation, or BIM integration with
-            clean, organized layer and data structures.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section id="how-it-works" class="section">
-      <div class="section-header">
-        <h2>How it Works</h2>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-index">1</div>
-          <h3>Install & Connect</h3>
-          <p>
-            Drop the plugin files into your Grasshopper components folder and restart.
-            The components appear under a dedicated “Bio-Intelligence” tab.
-          </p>
-        </div>
-        <div class="step">
-          <div class="step-index">2</div>
-          <h3>Define Inputs</h3>
-          <p>
-            Select host geometry (mesh or surface), seed points, and environmental data
-            if available (sun vectors, radiation maps, etc.).
-          </p>
-        </div>
-        <div class="step">
-          <div class="step-index">3</div>
-          <h3>Tune Growth Parameters</h3>
-          <p>
-            Adjust sliders for branching, decay, and iteration. Watch the pattern
-            adapt in real time as you balance performance and expression.
-          </p>
-        </div>
-        <div class="step">
-          <div class="step-index">4</div>
-          <h3>Export & Iterate</h3>
-          <p>
-            Bake results, hand off to BIM or fabrication, or keep iterating as you
-            refine your design intent.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- DOWNLOAD / DOCS -->
-    <section id="download" class="section section-alt">
-      <div class="section-header">
-        <h2>Download & Documentation</h2>
+    <!-- NOTES SECTION -->
+    <section id="notes" class="section">
+      <h2 class="section-title">Implementation notes</h2>
+      <div class="section-body">
         <p>
-          Use the links below to download the latest release and access setup guides,
-          sample files, and example definitions.
+          The JavaScript on this page is intentionally minimal: a small tooltip
+          helper for explaining cards on hover, and a scroll-reveal effect that
+          fades cards in as they enter the viewport. All layout is handled with
+          straightforward CSS, so you can easily move this into your own repo or
+          integrate it into a more complex UI.
         </p>
-      </div>
-      <div class="download-grid">
-        <div class="card">
-          <h3>Latest Release</h3>
-          <p>
-            Get the most recent stable build of the plugin.
-          </p>
-          <!-- TODO: update href to your real link -->
-          <a href="#" class="btn primary has-tooltip"
-             data-tooltip="Replace this link with your .gha or .zip download URL.">
-            Download .zip
-          </a>
-        </div>
-        <div class="card">
-          <h3>Documentation</h3>
-          <p>
-            Step-by-step setup instructions, example files, and FAQ.
-          </p>
-          <!-- TODO: update href to docs (Notion, GitHub, etc.) -->
-          <a href="#" class="btn ghost has-tooltip"
-             data-tooltip="Link out to GitHub, Notion, or any documentation platform you use.">
-            Open Docs
-          </a>
-        </div>
-        <div class="card">
-          <h3>Source / Repo</h3>
-          <p>
-            Explore the source code, contribute, or report issues.
-          </p>
-          <!-- TODO: update href to your GitHub repo -->
-          <a href="#" class="btn ghost has-tooltip"
-             data-tooltip="Point this to your GitHub repository for the plugin.">
-            View on GitHub
-          </a>
-        </div>
       </div>
     </section>
   </main>
 
-  <!-- TOOLTIP ELEMENT (managed by JS, inspired by the Cargo tooltip logic) -->
+  <!-- Tooltip element (controlled by script.js) -->
   <div id="tooltip" class="tooltip">
     <div class="tooltip-inner"></div>
   </div>
 
   <footer class="site-footer">
-    <span>© <span id="year"></span> Bio-Intelligence Plugin</span>
-    <span class="footer-note">Built for computational design workflows.</span>
+    <span>Layout Playground · <span id="year"></span></span>
+    <span class="footer-note">Built as a reference for your plugin site.</span>
   </footer>
 
   <script src="script.js" defer></script>
