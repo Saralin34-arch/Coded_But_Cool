@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Federal Energy Law Timeline</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow: hidden;
+      background: #e8e8e8;
+      font-family: "Courier New", Courier, monospace;
+      height: 100%;
+      width: 100%;
+    }
+
+    .timeline-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-image: url('timeline-bg.png');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+    }
+
+    /* Interactive hotspots */
+    .hotspot {
+      position: absolute;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .hotspot:hover {
+      background: rgba(155, 184, 211, 0.15);
+      box-shadow: 0 0 20px rgba(155, 184, 211, 0.3);
+    }
+
+    /* Popup tooltip */
+    .popup {
+      position: fixed;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+      max-width: 400px;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .popup.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .popup-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #9BB8D3;
+    }
+
+    .popup-year {
+      font-size: 1.5rem;
+      color: #D1B05C;
+      font-weight: 700;
+    }
+
+    .popup-abbr {
+      font-size: 1.2rem;
+      color: #1f2937;
+      font-weight: 700;
+    }
+
+    .popup-fullname {
+      font-size: 0.85rem;
+      color: #6b7280;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .popup-description {
+      font-size: 0.85rem;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="timeline-container">
+  <!-- Hotspots positioned over each law in the image -->
+  
+  <!-- 1975 EPCA - Top left -->
+  <div class="hotspot" id="hotspot-epca" 
+       style="left: 10%; top: 18%; width: 25%; height: 35%;"
+       data-year="1975"
+       data-abbr="EPCA"
+       data-fullname="Energy Policy and Conservation Act of 1975"
+       data-description="Established the foundation of U.S. federal energy policy. Created national energy conservation programs, fuel economy standards (CAFE), and the Strategic Petroleum Reserve. Set early authority for appliance and building-related energy efficiency standards.">
+  </div>
+
+  <!-- 1978 PURPA - Bottom left -->
+  <div class="hotspot" id="hotspot-purpa"
+       style="left: 13%; top: 56%; width: 22%; height: 35%;"
+       data-year="1978"
+       data-abbr="PURPA"
+       data-fullname="Public Utility Regulatory Policies Act of 1978"
+       data-description="Promoted energy efficiency and renewable energy by requiring utilities to buy power from qualifying renewable and cogeneration facilities. Influenced national energy demand and helped shift utilities toward cleaner generation sources.">
+  </div>
+
+  <!-- 1987 NAECA - Top center -->
+  <div class="hotspot" id="hotspot-naeca"
+       style="left: 36%; top: 22%; width: 20%; height: 32%;"
+       data-year="1987"
+       data-abbr="NAECA"
+       data-fullname="National Appliance Energy Conservation Act of 1987"
+       data-description="Created federal minimum energy efficiency standards for major appliances used in buildings (HVAC equipment, water heaters, lighting, refrigerators, etc.). Key to reducing building energy use through equipment performance requirements.">
+  </div>
+
+  <!-- 1992 EPAct - Bottom center -->
+  <div class="hotspot" id="hotspot-epact"
+       style="left: 42%; top: 56%; width: 18%; height: 35%;"
+       data-year="1992"
+       data-abbr="EPAct"
+       data-fullname="Energy Policy Act of 1992"
+       data-description="Expanded energy efficiency and renewable energy programs. Required states to adopt or consider national model energy codes (ASHRAE/IECC), marking the first major nationwide push for building energy code adoption. Added utility efficiency programs and tax incentives.">
+  </div>
+
+  <!-- 2007 EISA - Top right -->
+  <div class="hotspot" id="hotspot-eisa"
+       style="left: 60%; top: 16%; width: 28%; height: 38%;"
+       data-year="2007"
+       data-abbr="EISA"
+       data-fullname="Energy Independence and Security Act of 2007 + 10 CFR Part 433/435"
+       data-description="Strengthened federal building energy standards, expanded appliance efficiency requirements, increased renewable energy mandates. 10 CFR Part 433 requires new federal commercial buildings to meet ASHRAE 90.1-based performance levels (30% better than baseline). Part 435 sets standards for low-rise federal residential buildings.">
+  </div>
+
+  <!-- 2020 Energy Act - Bottom right -->
+  <div class="hotspot" id="hotspot-energyact"
+       style="left: 62%; top: 56%; width: 18%; height: 35%;"
+       data-year="2020"
+       data-abbr="Energy Act"
+       data-fullname="Energy Act of 2020"
+       data-description="Modernized federal energy and water efficiency requirements. Expanded metering, reporting, and performance tracking for federal buildings. Updated programs related to HVAC, building systems, grid integration, and technology deployment.">
+  </div>
+
+</div>
+
+<div class="popup" id="popup">
+  <div class="popup-header">
+    <span class="popup-year" id="popup-year"></span>
+    <span class="popup-abbr" id="popup-abbr"></span>
+  </div>
+  <div class="popup-fullname" id="popup-fullname"></div>
+  <div class="popup-description" id="popup-description"></div>
+</div>
+
+<script>
+const hotspots = document.querySelectorAll('.hotspot');
+const popup = document.getElementById('popup');
+const popupYear = document.getElementById('popup-year');
+const popupAbbr = document.getElementById('popup-abbr');
+const popupFullname = document.getElementById('popup-fullname');
+const popupDescription = document.getElementById('popup-description');
+
+hotspots.forEach(hotspot => {
+  hotspot.addEventListener('mouseenter', (e) => {
+    popupYear.textContent = hotspot.dataset.year;
+    popupAbbr.textContent = hotspot.dataset.abbr;
+    popupFullname.textContent = hotspot.dataset.fullname;
+    popupDescription.textContent = hotspot.dataset.description;
+    popup.classList.add('visible');
+  });
+
+  hotspot.addEventListener('mousemove', (e) => {
+    const x = e.clientX + 20;
+    const y = e.clientY + 20;
+    
+    const popupRect = popup.getBoundingClientRect();
+    const maxX = window.innerWidth - popupRect.width - 20;
+    const maxY = window.innerHeight - popupRect.height - 20;
+    
+    popup.style.left = Math.min(x, maxX) + 'px';
+    popup.style.top = Math.min(y, maxY) + 'px';
+  });
+
+  hotspot.addEventListener('mouseleave', () => {
+    popup.classList.remove('visible');
+  });
+});
+</script>
+
+</body>
+</html>

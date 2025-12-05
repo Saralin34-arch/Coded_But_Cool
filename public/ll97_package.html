@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NYC Local Law 97 Compliance Package</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow: hidden;
+      background: #e8e8e8;
+      font-family: "Courier New", Courier, monospace;
+      height: 100%;
+      width: 100%;
+    }
+
+    .container {
+      padding: 80px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      margin-top: 30px;
+    }
+
+    .title {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #1f2937;
+      letter-spacing: 0.05em;
+    }
+
+    .content {
+      display: flex;
+      gap: 60px;
+      flex: 1;
+      position: relative;
+    }
+
+    .main-content {
+      flex: 1;
+      max-width: 1000px;
+    }
+
+    .description {
+      font-size: 0.75rem;
+      color: #6b7280;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 550px;
+    }
+
+    .demos {
+      display: flex;
+      gap: 40px;
+    }
+
+    .demo-section {
+      flex: 0 0 auto;
+      width: 500px;
+    }
+
+    .demo-title {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #1f2937;
+      margin-bottom: 16px;
+    }
+
+    .demo-placeholder {
+      width: 100%;
+      height: 380px;
+      background: #cfd4dc;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8b95a5;
+      font-size: 0.9rem;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 180px;
+      padding-top: 0;
+      position: absolute;
+      right: 80px;
+      top: 0;
+    }
+
+    .sidebar-title {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #6b7280;
+      margin-bottom: 24px;
+    }
+
+    .download-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .download-link {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      cursor: pointer;
+      position: relative;
+      padding-right: 20px;
+    }
+
+    .download-link::after {
+      content: '↗';
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 0.85rem;
+      color: #9ca3af;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .download-link:hover {
+      color: #1f2937;
+    }
+
+    .download-link:hover::after {
+      opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1 class="title">New York City Local Law 97 Compliance Package</h1>
+  </div>
+
+  <div class="content">
+    <div class="main-content">
+      <p class="description">
+        The LL97 Compliance Tool brings real-time carbon and energy evaluation directly into Revit and Rhino, eliminating manual code checks and disconnected spreadsheets. By automatically analyzing building geometry, envelope performance, and energy use, it instantly calculates emissions, compares them to LL97 caps, and highlights non-compliant areas. With actionable design suggestions and one-click documentation, the tool turns LL97 compliance into a fast, integrated part of early design rather than a late, time-consuming bottleneck.
+      </p>
+
+      <div class="demos">
+        <div class="demo-section">
+          <h2 class="demo-title">Revit Path</h2>
+          <div class="demo-placeholder">
+            Video placeholder
+          </div>
+        </div>
+
+        <div class="demo-section">
+          <h2 class="demo-title">Rhino/Grasshopper Path</h2>
+          <div class="demo-placeholder">
+            Video placeholder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <h3 class="sidebar-title">Click to Download !</h3>
+      <div class="download-list">
+        <a class="download-link" href="#">Revit File</a>
+        <a class="download-link" href="#">Rhino File</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+

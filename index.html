@@ -4,124 +4,153 @@
   <meta charset="UTF-8" />
   <title>Layout Playground – MycoCore</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="brand">MycoCore / Layout Demo</div>
-    <div class="header-meta">Wireframe · 2025</div>
+    <div class="brand">SARA LIN / CAPSTONE 2</div>
+    <div class="header-meta">CODED..BUT..STILL..SUPER COOL</div>
+    <nav class="header-nav">
+      <a href="#" class="nav-link" data-panel="index-panel">Index</a>
+      <a href="#" class="nav-link" data-panel="info-panel">Info</a>
+    </nav>
   </header>
 
-  <!-- Right-side index / info panel -->
-  <aside class="side-panel">
-    <div class="side-section">
-      <div class="side-label">Index</div>
-      <nav class="side-nav">
-        <a href="#canvas">Canvas</a>
-        <a href="#about">About</a>
-        <a href="#structure">Structure</a>
-        <a href="#notes">Notes</a>
+  <!-- Overlay for expanded panels -->
+  <div class="panel-overlay"></div>
+
+  <!-- Index slide-out panel -->
+  <aside id="index-panel" class="slide-panel slide-panel--right">
+    <button class="slide-panel__close">×</button>
+    <div class="slide-panel__content">
+      <div class="slide-panel__label">Index</div>
+      <nav class="slide-panel__nav">
+        <a href="#story" class="slide-panel__link">Story</a>
+        <a href="#energy-sankey" class="slide-panel__link">Energy Sankey</a>
+        <a href="#energy-timeline" class="slide-panel__link">Federal Timeline</a>
+        <a href="#energy-laws" class="slide-panel__link">Energy Laws Map</a>
+        <a href="#workflow-comparison" class="slide-panel__link">Workflow Comparison</a>
+        <a href="#energy-code-lab" class="slide-panel__link">Energy Code Lab</a>
+        <a href="#ll97-package" class="slide-panel__link">LL97 Package</a>
       </nav>
     </div>
-    <div class="side-section">
-      <div class="side-label">Info</div>
-      <p class="side-text">
-        Simple layout inspired by Cargo wireframes.<br />
+  </aside>
+
+  <!-- Info slide-out panel -->
+  <aside id="info-panel" class="slide-panel slide-panel--right">
+    <button class="slide-panel__close">×</button>
+    <div class="slide-panel__content">
+      <div class="slide-panel__label">Info</div>
+      <p class="slide-panel__text">
+        Simple layout inspired by Cargo wireframes.<br /><br />
         Use this as a starting point to integrate your plugin UI.
+        The sliding panels can house any content you need.
       </p>
     </div>
   </aside>
 
   <main>
-    <!-- MAIN CANVAS -->
-    <section id="canvas" class="canvas">
-      <div class="canvas-inner">
-        <!-- Large overlapping cards with "+" corners -->
-        <article class="card card--large reveal has-tooltip"
-                 data-tooltip="Primary content area. Place hero image, statement, or plugin preview here.">
-          <span class="card-label">Main Panel</span>
-          <span class="card-placeholder">Drop main content</span>
-        </article>
-
-        <article class="card card--medium reveal has-tooltip"
-                 data-tooltip="Secondary panel. Use for project list, quick links, or a short description.">
-          <span class="card-label">Secondary Panel</span>
-          <span class="card-placeholder">Drop supporting content</span>
-        </article>
-
-        <article class="card card--wide reveal has-tooltip"
-                 data-tooltip="Use this strip for navigation, tags, or a short timeline.">
-          <span class="card-label">Wide Strip</span>
-          <span class="card-placeholder">Drop navigation / tags</span>
-        </article>
-
-        <article class="card card--tall reveal has-tooltip"
-                 data-tooltip="Tall column. Good for notes, parameters, or plugin settings.">
-          <span class="card-label">Tall Panel</span>
-          <span class="card-placeholder">Drop notes / settings</span>
-        </article>
+    <!-- SLIDE 1: STORYTELLING SECTION with typewriter effect -->
+    <section id="story" class="story-section">
+      <div class="story-container">
+        <div class="story-content">
+          <p class="story-paragraph" id="typewriter-paragraph" data-text="Coded..But..Still...Super Cool is a website that houses energy related compliance tools for Revit and Grasshopper. The aim of the website is to help architects, designers, construction workers, and real estate developers to facilitate the workflow in the design and building process. In the long term, supporting the creation of a sustainable building environment by automating the energy policy matching process in the traditional construction workflow."></p>
+        </div>
+        <div class="scroll-indicator">
+          <span>↓</span>
+        </div>
       </div>
+      <span class="slide-number">01 / 07</span>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="section">
-      <h2 class="section-title">About this layout</h2>
-      <div class="section-body">
-        <p>
-          This page is a neutral wireframe built with plain HTML, CSS, and a small
-          amount of JavaScript. It takes cues from Cargo’s demo layouts:
-          overlapping grey rectangles, plus signs indicating editable areas,
-          and a minimal index on the right side.
-        </p>
-        <p>
-          Replace the placeholder labels with your own plugin content: images,
-          descriptions, or embedded demos. You can also adjust the positions
-          and sizes of the cards to match your own composition.
-        </p>
+    <!-- SLIDE 2: ENERGY SANKEY DIAGRAM -->
+    <section id="energy-sankey" class="section section--sankey">
+      <h2 class="section-title">U.S. Energy Flow</h2>
+      <p class="section-subtitle">Interactive Sankey diagram showing energy sources and consumption sectors</p>
+      <div class="sankey-container">
+        <iframe
+          src="public/energy_sankey.html"
+          class="sankey-iframe"
+          title="U.S. Energy Sankey Diagram"
+          scrolling="no">
+        </iframe>
       </div>
+      <span class="slide-number">02 / 07</span>
     </section>
 
-    <!-- STRUCTURE SECTION -->
-    <section id="structure" class="section section--columns">
-      <div class="column">
-        <h3>Layout principles</h3>
-        <ul>
-          <li>Large, simple blocks instead of dense UI elements.</li>
-          <li>Overlapping cards to suggest depth and hierarchy.</li>
-          <li>Ample white space around the “canvas” area.</li>
-          <li>Small, light typography in the chrome (header + index).</li>
-        </ul>
+    <!-- SLIDE 3: FEDERAL ENERGY TIMELINE -->
+    <section id="energy-timeline" class="section section--timeline">
+      <h2 class="timeline-title">Federal Energy Law Evolution Timeline</h2>
+      <div class="timeline-frame-container">
+        <iframe
+          src="public/energy_timeline.html"
+          class="timeline-iframe"
+          title="Federal Energy Law Timeline"
+          scrolling="no">
+        </iframe>
       </div>
-      <div class="column">
-        <h3>How to adapt</h3>
-        <ul>
-          <li>Swap grey cards for images or interactive previews.</li>
-          <li>Map each card to a specific plugin function.</li>
-          <li>Use the side panel for quick access to sections or presets.</li>
-          <li>Extend the layout with more cards or a grid if needed.</li>
-        </ul>
-      </div>
+      <span class="slide-number">03 / 07</span>
     </section>
 
-    <!-- NOTES SECTION -->
-    <section id="notes" class="section">
-      <h2 class="section-title">Implementation notes</h2>
-      <div class="section-body">
-        <p>
-          The JavaScript on this page is intentionally minimal: a small tooltip
-          helper for explaining cards on hover, and a scroll-reveal effect that
-          fades cards in as they enter the viewport. All layout is handled with
-          straightforward CSS, so you can easily move this into your own repo or
-          integrate it into a more complex UI.
-        </p>
+    <!-- SLIDE 4: ENERGY LAWS MAP -->
+    <section id="energy-laws" class="section section--map">
+      <h2 class="section-title">Local Building Energy Laws</h2>
+      <p class="section-subtitle">Interactive map showing city-level energy regulations across the U.S.</p>
+      <div class="map-container">
+        <iframe
+          src="public/energy_laws_map.html"
+          class="map-iframe"
+          title="U.S. Building Energy Laws Map"
+          scrolling="no">
+        </iframe>
       </div>
+      <span class="slide-number">04 / 07</span>
+    </section>
+
+    <!-- SLIDE 5: WORKFLOW COMPARISON -->
+    <section id="workflow-comparison" class="section section--workflow">
+      <h2 class="section-title">Workflow Comparison</h2>
+      <p class="section-subtitle">Traditional vs. Optimized compliance workflow</p>
+      <div class="workflow-frame-container">
+        <iframe
+          src="public/workflow_comparison.html"
+          class="workflow-iframe"
+          title="Workflow Comparison"
+          scrolling="no">
+        </iframe>
+      </div>
+      <span class="slide-number">05 / 07</span>
+    </section>
+
+    <!-- SLIDE 6: ENERGY CODE LAB -->
+    <section id="energy-code-lab" class="section section--codelab">
+      <div class="codelab-frame-container">
+        <iframe
+          src="public/energy_code_lab.html"
+          class="codelab-iframe"
+          title="Energy Code Lab"
+          scrolling="no">
+        </iframe>
+      </div>
+      <span class="slide-number">06 / 07</span>
+    </section>
+
+    <!-- SLIDE 7: LL97 COMPLIANCE PACKAGE -->
+    <section id="ll97-package" class="section section--ll97">
+      <div class="ll97-frame-container">
+        <iframe
+          src="public/ll97_package.html"
+          class="ll97-iframe"
+          title="NYC Local Law 97 Compliance Package"
+          scrolling="no">
+        </iframe>
+      </div>
+      <span class="slide-number">06 / 07</span>
     </section>
   </main>
-
-  <!-- Tooltip element (controlled by script.js) -->
-  <div id="tooltip" class="tooltip">
-    <div class="tooltip-inner"></div>
-  </div>
 
   <footer class="site-footer">
     <span>Layout Playground · <span id="year"></span></span>

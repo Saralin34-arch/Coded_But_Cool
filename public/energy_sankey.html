@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>U.S. Energy Sankey</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: transparent;
+      color: #f9fafb;
+      font-family: "Courier New", Courier, monospace;
+    }
+    
+    body {
+      padding: 16px 24px;
+    }
+
+    .sankey-header {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .sankey-title {
+      font-size: 0.9rem;
+      margin: 0;
+      font-weight: 400;
+      color: #9ca3af;
+    }
+
+    #controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    #controls label {
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    #yearSelect {
+      background: #111827;
+      color: #f9fafb;
+      border: 1px solid #374151;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    #yearSelect:hover {
+      border-color: #6b7280;
+    }
+
+    #yearSelect:focus {
+      outline: none;
+      border-color: #9BB8D3;
+    }
+
+    #chart {
+      background: transparent;
+      padding: 0;
+    }
+
+    #sankeySvg {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .node rect {
+      stroke: #020617;
+      rx: 4;
+      ry: 4;
+      transition: opacity 0.2s ease;
+    }
+
+    .node rect:hover {
+      opacity: 0.8;
+    }
+
+    .node text {
+      fill: #f9fafb;
+      font-size: 12px;
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    .link {
+      fill: none;
+      stroke-opacity: 0.45;
+      mix-blend-mode: screen;
+      transition: stroke-opacity 0.2s ease;
+    }
+
+    .link:hover {
+      stroke-opacity: 0.9;
+    }
+
+    .source-link {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .source-link a {
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-decoration: none;
+      word-break: break-all;
+      transition: color 0.2s ease;
+    }
+
+    .source-link a:hover {
+      color: #9BB8D3;
+    }
+
+    .legend {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="sankey-header">
+  <p class="sankey-title">By Source → Sector</p>
+  <div id="controls">
+    <label>Select year:</label>
+    <select id="yearSelect">
+      <option value="2023">2023</option>
+      <option value="2024">2024</option>
+    </select>
+  </div>
+</div>
+
+<div id="chart">
+  <svg id="sankeySvg" width="960" height="520"></svg>
+</div>
+
+<div class="source-link">
+  <a href="https://www.eia.gov/outlooks/aeo/data/browser/#/?id=2-AEO2025&cases=ref2025&sourcekey=0" target="_blank" rel="noopener noreferrer">https://www.eia.gov/outlooks/aeo/data/browser/#/?id=2-AEO2025&cases=ref2025&sourcekey=0</a>
+</div>
+
+<div class="legend">
+  <div class="legend-item">
+    <div class="legend-color" style="background: #D1B05C;"></div>
+    <span>Petroleum</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-color" style="background: #9BB8D3;"></div>
+    <span>Natural Gas</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-color" style="background: #A89F9A;"></div>
+    <span>Coal</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-color" style="background: #C9D9E8;"></div>
+    <span>Nuclear</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-color" style="background: #E2D4B5;"></div>
+    <span>Renewables</span>
+  </div>
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+
+<script>
+// HORIZONTAL Sankey Script
+// ------------------------------------------------
+
+const nodes = [
+  { name: "Petroleum" },
+  { name: "Natural Gas" },
+  { name: "Coal" },
+  { name: "Nuclear" },
+  { name: "Renewables" },
+  { name: "Residential" },
+  { name: "Commercial" },
+  { name: "Industrial" },
+  { name: "Transportation" },
+  { name: "Electric Power" }
+];
+
+// COLORS
+const sourceColors = {
+  "Petroleum":   "#D1B05C",
+  "Natural Gas": "#9BB8D3",
+  "Coal":        "#A89F9A",
+  "Nuclear":     "#C9D9E8",
+  "Renewables":  "#E2D4B5"
+};
+
+const svg = d3.select("#sankeySvg");
+const width = +svg.attr("width");
+const height = +svg.attr("height");
+
+// horizontal left→right sankey
+const sankey = d3.sankey()
+  .nodeWidth(14)
+  .nodePadding(18)
+  .nodeAlign(d3.sankeyLeft)
+  .extent([[40, 20], [width - 40, height - 40]]);
+
+// link path generator
+const linkPath = d3.sankeyLinkHorizontal();
+const g = svg.append("g");
+
+// load CSV dynamically
+d3.csv("data/energy_table2.csv").then(data => {
+
+  // keep only required rows
+  const fuels = ["Petroleum", "Natural Gas", "Coal", "Nuclear", "Renewables"];
+  const sectors = ["Residential", "Commercial", "Industrial", "Transportation", "Electric Power"];
+
+  // organize values by year
+  const linksByYear = { "2023": [], "2024": [] };
+
+  fuels.forEach(fuel => {
+    const row = data.find(d => d.Source === fuel || d.Fuel === fuel || d["Energy Source"] === fuel);
+
+    if (!row) {
+      console.warn(`Fuel "${fuel}" not found in CSV`);
+      return;
+    }
+
+    sectors.forEach(sector => {
+      ["2023", "2024"].forEach(year => {
+        // Try different column naming conventions
+        let val = parseFloat(row[`${sector}_${year}`]) ||
+                  parseFloat(row[`${sector} ${year}`]) ||
+                  parseFloat(row[sector]) ||
+                  0;
+
+        // add link only if nonzero
+        if (val > 0) {
+          linksByYear[year].push({
+            source: fuel,
+            target: sector,
+            value: val
+          });
+        }
+      });
+    });
+  });
+
+  const nameToIndex = new Map(nodes.map((d, i) => [d.name, i]));
+
+  function buildGraph(year) {
+    return sankey({
+      nodes: nodes.map(d => Object.assign({}, d)),
+      links: linksByYear[year].map(l => ({
+        source: nameToIndex.get(l.source),
+        target: nameToIndex.get(l.target),
+        value: l.value,
+        fuel: l.source
+      }))
+    });
+  }
+
+  function render(year) {
+    const graph = buildGraph(year);
+
+    // LINKS
+    const linksSel = g.selectAll(".link")
+      .data(graph.links, d => d.fuel + "-" + d.target.name);
+
+    linksSel.exit()
+      .transition()
+      .duration(300)
+      .attr("stroke-opacity", 0)
+      .remove();
+
+    const linksEnter = linksSel.enter()
+      .append("path")
+      .attr("class", "link")
+      .attr("stroke-opacity", 0);
+
+    linksEnter.merge(linksSel)
+      .transition()
+      .duration(500)
+      .attr("d", linkPath)
+      .attr("stroke", d => sourceColors[d.fuel])
+      .attr("stroke-width", d => Math.max(2, d.width))
+      .attr("stroke-opacity", 0.45);
+
+    // Add hover events
+    g.selectAll(".link")
+      .on("mouseover", function() {
+        d3.select(this).attr("stroke-opacity", 0.9);
+      })
+      .on("mouseout", function() {
+        d3.select(this).attr("stroke-opacity", 0.45);
+      });
+
+    // NODES
+    const nodesSel = g.selectAll(".node")
+      .data(graph.nodes, d => d.name);
+
+    const nodesEnter = nodesSel.enter().append("g").attr("class", "node");
+
+    nodesEnter.append("rect");
+    nodesEnter.append("text");
+
+    nodesEnter.merge(nodesSel).select("rect")
+      .transition()
+      .duration(500)
+      .attr("x", d => d.x0)
+      .attr("y", d => d.y0)
+      .attr("height", d => Math.max(4, d.y1 - d.y0))
+      .attr("width", d => d.x1 - d.x0)
+      .attr("fill", d => sourceColors[d.name] || "#1f2937");
+
+    // Calculate total energy and percentages for sectors
+    const sectorNodes = graph.nodes.filter(n => 
+      ["Residential", "Commercial", "Industrial", "Transportation", "Electric Power"].includes(n.name)
+    );
+    const totalSectorEnergy = sectorNodes.reduce((sum, n) => sum + (n.value || 0), 0);
+
+    nodesEnter.merge(nodesSel).select("text")
+      .transition()
+      .duration(500)
+      .attr("x", d => d.x0 < width / 2 ? d.x1 + 8 : d.x0 - 8)
+      .attr("y", d => (d.y0 + d.y1) / 2)
+      .attr("dy", "0.35em")
+      .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
+      .text(d => {
+        // Add percentage for Residential and Commercial
+        if (d.name === "Residential" || d.name === "Commercial") {
+          const pct = totalSectorEnergy > 0 ? ((d.value / totalSectorEnergy) * 100).toFixed(1) : 0;
+          return `${d.name} (${pct}%)`;
+        }
+        return d.name;
+      });
+
+    nodesSel.exit().remove();
+  }
+
+  // initial render
+  render("2023");
+
+  // dropdown event
+  document.getElementById("yearSelect").addEventListener("change", e => {
+    render(e.target.value);
+  });
+
+}).catch(error => {
+  console.error("Error loading CSV:", error);
+  
+  // Fallback: render with sample data if CSV fails to load
+  const sampleLinks = {
+    "2023": [
+      { source: "Petroleum", target: "Transportation", value: 26.5 },
+      { source: "Petroleum", target: "Industrial", value: 8.2 },
+      { source: "Petroleum", target: "Residential", value: 1.1 },
+      { source: "Petroleum", target: "Commercial", value: 0.5 },
+      { source: "Natural Gas", target: "Electric Power", value: 11.8 },
+      { source: "Natural Gas", target: "Industrial", value: 10.2 },
+      { source: "Natural Gas", target: "Residential", value: 5.1 },
+      { source: "Natural Gas", target: "Commercial", value: 3.5 },
+      { source: "Coal", target: "Electric Power", value: 8.4 },
+      { source: "Coal", target: "Industrial", value: 1.0 },
+      { source: "Nuclear", target: "Electric Power", value: 8.1 },
+      { source: "Renewables", target: "Electric Power", value: 8.5 },
+      { source: "Renewables", target: "Industrial", value: 2.8 },
+      { source: "Renewables", target: "Transportation", value: 1.5 },
+      { source: "Renewables", target: "Residential", value: 0.8 },
+      { source: "Renewables", target: "Commercial", value: 0.5 }
+    ],
+    "2024": [
+      { source: "Petroleum", target: "Transportation", value: 26.2 },
+      { source: "Petroleum", target: "Industrial", value: 8.0 },
+      { source: "Petroleum", target: "Residential", value: 1.0 },
+      { source: "Petroleum", target: "Commercial", value: 0.5 },
+      { source: "Natural Gas", target: "Electric Power", value: 12.2 },
+      { source: "Natural Gas", target: "Industrial", value: 10.5 },
+      { source: "Natural Gas", target: "Residential", value: 4.9 },
+      { source: "Natural Gas", target: "Commercial", value: 3.6 },
+      { source: "Coal", target: "Electric Power", value: 7.8 },
+      { source: "Coal", target: "Industrial", value: 0.9 },
+      { source: "Nuclear", target: "Electric Power", value: 8.3 },
+      { source: "Renewables", target: "Electric Power", value: 9.2 },
+      { source: "Renewables", target: "Industrial", value: 3.0 },
+      { source: "Renewables", target: "Transportation", value: 1.7 },
+      { source: "Renewables", target: "Residential", value: 0.9 },
+      { source: "Renewables", target: "Commercial", value: 0.6 }
+    ]
+  };
+
+  const nameToIndex = new Map(nodes.map((d, i) => [d.name, i]));
+
+  function buildGraph(year) {
+    return sankey({
+      nodes: nodes.map(d => Object.assign({}, d)),
+      links: sampleLinks[year].map(l => ({
+        source: nameToIndex.get(l.source),
+        target: nameToIndex.get(l.target),
+        value: l.value,
+        fuel: l.source
+      }))
+    });
+  }
+
+  function render(year) {
+    const graph = buildGraph(year);
+
+    // LINKS
+    const linksSel = g.selectAll(".link")
+      .data(graph.links, d => d.fuel + "-" + d.target.name);
+
+    linksSel.exit()
+      .transition()
+      .duration(300)
+      .attr("stroke-opacity", 0)
+      .remove();
+
+    const linksEnter = linksSel.enter()
+      .append("path")
+      .attr("class", "link")
+      .attr("stroke-opacity", 0);
+
+    linksEnter.merge(linksSel)
+      .transition()
+      .duration(500)
+      .attr("d", linkPath)
+      .attr("stroke", d => sourceColors[d.fuel])
+      .attr("stroke-width", d => Math.max(2, d.width))
+      .attr("stroke-opacity", 0.45);
+
+    g.selectAll(".link")
+      .on("mouseover", function() {
+        d3.select(this).attr("stroke-opacity", 0.9);
+      })
+      .on("mouseout", function() {
+        d3.select(this).attr("stroke-opacity", 0.45);
+      });
+
+    // NODES
+    const nodesSel = g.selectAll(".node")
+      .data(graph.nodes, d => d.name);
+
+    const nodesEnter = nodesSel.enter().append("g").attr("class", "node");
+
+    nodesEnter.append("rect");
+    nodesEnter.append("text");
+
+    nodesEnter.merge(nodesSel).select("rect")
+      .transition()
+      .duration(500)
+      .attr("x", d => d.x0)
+      .attr("y", d => d.y0)
+      .attr("height", d => Math.max(4, d.y1 - d.y0))
+      .attr("width", d => d.x1 - d.x0)
+      .attr("fill", d => sourceColors[d.name] || "#1f2937");
+
+    // Calculate total energy and percentages for sectors
+    const sectorNodesFallback = graph.nodes.filter(n => 
+      ["Residential", "Commercial", "Industrial", "Transportation", "Electric Power"].includes(n.name)
+    );
+    const totalSectorEnergyFallback = sectorNodesFallback.reduce((sum, n) => sum + (n.value || 0), 0);
+
+    nodesEnter.merge(nodesSel).select("text")
+      .transition()
+      .duration(500)
+      .attr("x", d => d.x0 < width / 2 ? d.x1 + 8 : d.x0 - 8)
+      .attr("y", d => (d.y0 + d.y1) / 2)
+      .attr("dy", "0.35em")
+      .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
+      .text(d => {
+        // Add percentage for Residential and Commercial
+        if (d.name === "Residential" || d.name === "Commercial") {
+          const pct = totalSectorEnergyFallback > 0 ? ((d.value / totalSectorEnergyFallback) * 100).toFixed(1) : 0;
+          return `${d.name} (${pct}%)`;
+        }
+        return d.name;
+      });
+
+    nodesSel.exit().remove();
+  }
+
+  render("2023");
+
+  document.getElementById("yearSelect").addEventListener("change", e => {
+    render(e.target.value);
+  });
+});
+</script>
+
+</body>
+</html>
+
