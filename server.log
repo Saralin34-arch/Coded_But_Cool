@@ -12,3 +12,4 @@
 ::1 - - [25/Nov/2025 21:38:23] code 404, message File not found
 ::1 - - [25/Nov/2025 21:38:23] "HEAD /style.css HTTP/1.1" 404 -
 ::1 - - [25/Nov/2025 21:38:51] "HEAD /styles.css HTTP/1.1" 200 -
+::ffff:192.168.1.1 - - [25/Nov/2025 22:05:49] "GET / HTTP/1.1" 200 -
