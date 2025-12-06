@@ -19,179 +19,27 @@
     }
 
     .container {
-      padding: 15px 30px;
+      width: 100%;
       height: 100%;
       display: flex;
-      gap: 50px;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
+      padding: 20px;
+      margin-top: -50px;
     }
 
-    .workflow-section {
-      flex: 0 0 auto;
-      width: 560px;
+    .diagram-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
     }
 
-    .workflow-header {
-      margin-bottom: 12px;
-    }
-
-    .workflow-title {
-      font-size: 0.95rem;
-      font-weight: 400;
-      color: #4b5563;
-      letter-spacing: 0.03em;
-      margin-bottom: 3px;
-    }
-
-    .workflow-subtitle {
-      font-size: 0.65rem;
-      color: #9ca3af;
-    }
-
-    .flow-columns {
-      display: flex;
-      gap: 8px;
-      position: relative;
-    }
-
-    .flow-column {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .step {
-      background: #c9cdd4;
-      border-radius: 4px;
-      padding: 8px 12px;
-      text-align: left;
-    }
-
-    .step-title {
-      font-size: 0.62rem;
-      font-weight: 400;
-      color: #1f2937;
-      line-height: 1.4;
-    }
-
-    .step-desc {
-      font-size: 0.52rem;
-      color: #4b5563;
-      line-height: 1.3;
-      margin-top: 1px;
-    }
-
-      </style>
+  </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- Traditional Path -->
-  <div class="workflow-section">
-    <div class="workflow-header">
-      <h2 class="workflow-title">Traditional Path</h2>
-      <p class="workflow-subtitle">Standard compliance workflow</p>
-    </div>
-    <div class="flow-columns">
-      <!-- Left Column -->
-      <div class="flow-column">
-        <div class="step">
-          <div class="step-title">Pre-Design / Code Research</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Schematic Design</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Design Development</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Preliminary Energy Check</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Choose Compliance Path</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Design Development</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Choose Compliance Path</div>
-          <div class="step-desc">(Prescriptive / COMcheck / Modeling)</div>
-        </div>
-      </div>
-      
-      <!-- Right Column - flows down -->
-      <div class="flow-column">
-        <div class="step">
-          <div class="step-title">Construction Documents</div>
-          <div class="step-desc">(Energy Drawings + Forms)</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Schematic Design</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Internal QA + Coordination</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Permit Submission</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Review Correction</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Permit Approved !</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Optimized Path -->
-  <div class="workflow-section">
-    <div class="workflow-header">
-      <h2 class="workflow-title">Optimized Path</h2>
-      <p class="workflow-subtitle">With compliance automation tool</p>
-    </div>
-    <div class="flow-columns">
-      <!-- Left Column -->
-      <div class="flow-column">
-        <div class="step">
-          <div class="step-title">Start Project</div>
-          <div class="step-desc">(Architect opens Revit / Rhino)</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Auto Code Detection Tool</div>
-          <div class="step-desc">Identifies Compliance Laws</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Auto Building Information</div>
-          <div class="step-desc">Read from the model</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Instant Energy Compliance</div>
-          <div class="step-desc">Check & Result</div>
-        </div>
-        <div class="step">
-          <div class="step-title">One-Click Generate</div>
-          <div class="step-desc">Documentation</div>
-        </div>
-      </div>
-      
-      <!-- Right Column - flows down -->
-      <div class="flow-column">
-        <div class="step">
-          <div class="step-title">Permit Submission</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Export PDFs / JSON</div>
-          <div class="step-desc">for permit drawings</div>
-        </div>
-        <div class="step">
-          <div class="step-title">Smart Suggestions to Fix</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <img src="Workflowdiagram.png" alt="Workflow Comparison Diagram" class="diagram-image">
 </div>
 
 </body>
