@@ -906,6 +906,7 @@ body {
   justify-content: center;
   align-items: center;
   margin-left: -12.5%;
+  margin-top: 50px;
 }
 
 .video-iframe {
@@ -914,4 +915,12 @@ body {
   border: none;
   background: transparent;
   overflow: auto;
+}
+
+.section--video .slide-number {
+  color: #9ca3af;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 0.85rem;
 }
