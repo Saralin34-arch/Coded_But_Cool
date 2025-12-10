@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Website Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow: hidden;
+      background: #e8e8e8;
+      font-family: "Courier New", Courier, monospace;
+      height: 100%;
+      width: 100%;
+    }
+
+    .container {
+      padding: 30px 40px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .video-container {
+      width: 100%;
+      max-width: 2790px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      background: transparent;
+      margin-top: 80px;
+      margin-left: 70px;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      min-height: 400px;
+      display: block;
+      background: transparent;
+      object-fit: contain;
+    }
+
+    video:hover {
+      background: transparent;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="video-container">
+    <video controls autoplay muted loop playsinline preload="auto">
+      <source src="website-demo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+</body>
+</html>
+
