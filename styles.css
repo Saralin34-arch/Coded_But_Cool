@@ -726,6 +726,55 @@ body {
   color: #6b7280;
 }
 
+/* ===== Case Study Section ===== */
+
+.section--casestudy {
+  background: #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem;
+  padding-top: 60px;
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.section--casestudy .section-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.casestudy-frame-container {
+  width: 98%;
+  height: 85vh;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.casestudy-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+}
+
+.section--casestudy .slide-number {
+  color: #9ca3af;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 0.85rem;
+  z-index: 10;
+}
+
 /* ===== Energy Code Lab Section ===== */
 
 .section--codelab {

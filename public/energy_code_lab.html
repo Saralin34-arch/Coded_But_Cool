@@ -321,7 +321,7 @@
                 data-title="New York City"
                 data-subtitle="Local Law 97"
                 data-description="NYC's Climate Mobilization Act includes Local Law 97, requiring buildings over 25,000 sq ft to meet carbon emission limits starting in 2024, with stricter limits in 2030. Penalties apply for non-compliance."
-                onclick="window.parent.location.href='#ll97-package'">
+                onclick="navigateToLL97()">
           New York City : Local Law 97
         </button>
         <button class="city-btn"
@@ -371,6 +371,31 @@ const documentContent = document.getElementById('document-content');
 const documentTitle = document.getElementById('document-title');
 const documentSubtitle = document.getElementById('document-subtitle');
 const documentDescription = document.getElementById('document-description');
+
+// Navigate to LL97 Package page
+function navigateToLL97() {
+  try {
+    // Try to scroll parent window to the LL97 section
+    if (window.top && window.top !== window) {
+      const targetSection = window.top.document.getElementById('ll97-package');
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.top.location.hash = '#ll97-package';
+      }
+    } else if (window.parent && window.parent !== window) {
+      const targetSection = window.parent.document.getElementById('ll97-package');
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.parent.location.hash = '#ll97-package';
+      }
+    }
+  } catch (e) {
+    // If cross-origin issues, try hash navigation
+    window.top.location.hash = '#ll97-package';
+  }
+}
 
 // Show content in document panel
 function showInPanel(element) {
