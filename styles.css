@@ -1060,12 +1060,12 @@ body {
 
 .video-frame-container {
   width: 125%;
-  height: 80vh;
+  height: 88vh;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-left: -12.5%;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .video-iframe {
