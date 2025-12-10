@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!paragraph) return;
 
   const TYPING_SPEED = 35; // ms per character
+  const PAUSE_DURATION = 60000; // 1 minute pause before restarting
   const text = paragraph.dataset.text;
   let hasStarted = false;
 
@@ -32,6 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         // Keep cursor blinking at the end
         paragraph.appendChild(cursor);
+        // Wait 1 minute then restart
+        setTimeout(() => {
+          typeText();
+        }, PAUSE_DURATION);
       }
     }
     

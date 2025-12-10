@@ -202,6 +202,34 @@ body {
   justify-content: center;
   padding: 6rem 2rem;
   background: #f5f5f5;
+  position: relative;
+  overflow: hidden;
+}
+
+.story-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('public/FirstpageBackground.png') center/cover no-repeat;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.story-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.story-section .slide-number {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  color: #9ca3af;
+  font-size: 0.85rem;
+  z-index: 10;
 }
 
 .story-container {
@@ -222,6 +250,7 @@ body {
 .story-paragraph {
   color: #1a1a1a;
   font-size: 1.1rem;
+  font-weight: 600;
   line-height: 1.9;
   min-height: 200px;
 }
@@ -735,11 +764,13 @@ body {
   max-width: 100%;
   padding: 0;
   position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .ll97-frame-container {
   width: 125%;
-  height: 118vh;
+  height: 90vh;
   position: relative;
   margin-left: -12.5%;
 }
@@ -757,6 +788,8 @@ body {
   position: absolute;
   bottom: 2rem;
   right: 2rem;
+  font-size: 0.85rem;
+  z-index: 10;
 }
 
 /* ===== Workflow Comparison Section ===== */
@@ -892,16 +925,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 1rem;
-  min-height: 100vh;
+  padding-bottom: 4rem;
+  height: 100vh;
   scroll-snap-align: start;
   position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .video-frame-container {
   width: 125%;
-  height: 118vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -923,4 +959,5 @@ body {
   bottom: 2rem;
   right: 2rem;
   font-size: 0.85rem;
+  z-index: 10;
 }
