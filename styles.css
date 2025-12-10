@@ -967,6 +967,80 @@ body {
   background: #aaa;
 }
 
+/* ===== Architecture Diagram Section ===== */
+
+.section--architecture {
+  background: url('public/Revit Backend Architecture.png') center center / contain no-repeat;
+  background-color: #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2rem;
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* ===== Backend Architecture Section ===== */
+
+.section--backend {
+  background: url('public/BackEndArchitecture Background.png') center center / contain no-repeat;
+  background-color: #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2rem;
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.section--backend .section-title {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #1f2937;
+  letter-spacing: 0.1em;
+  text-align: center;
+  z-index: 10;
+}
+
+.section--backend .section-subtitle {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9rem;
+  color: #6b7280;
+  text-align: center;
+  z-index: 10;
+}
+
+.section--backend .slide-number {
+  color: #9ca3af;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 0.85rem;
+  z-index: 10;
+}
+
+.section--architecture .slide-number {
+  color: #9ca3af;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 0.85rem;
+  z-index: 10;
+}
+
 /* ===== Video Demo Section ===== */
 
 .section--video {
